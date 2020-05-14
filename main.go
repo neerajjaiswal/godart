@@ -38,17 +38,6 @@ func hello(arguments interface{}) (reply interface{}, err error) {
 	return goMsg, nil
 }
 
-// func (p *Example) sendLater(arguments interface{}) (reply interface{}, err error) {
-// 	time.Sleep(3 * time.Second)
-// 	if rep, err := p.channel.InvokeMethodWithReply("InvokeMethodWithReply", "text_from_golang"); err != nil {
-// 		log.Println("InvokeMethod error:", err)
-// 	} else {
-// 		log.Println("rep.(string) != \"" + rep.(string) + "\"")
-// 	}
-//
-// 	return "byefromgo", nil
-// }
-
 // mutualCall is attached to the plugin struct
 func (p *Example) mutualCall(arguments interface{}) (reply interface{}, err error) {
 	go func() {
