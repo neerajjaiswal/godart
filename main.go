@@ -52,7 +52,7 @@ func hello(arguments interface{}) (reply interface{}, err error) {
 // mutualCall is attached to the plugin struct
 func (p *Example) mutualCall(arguments interface{}) (reply interface{}, err error) {
 	go func() {
-		time.Sleep(10 * time.Second)
+		time.Sleep(3 * time.Second)
 		if rep, err := p.channel.InvokeMethodWithReply("InvokeMethodWithReply", "text_from_golang"); err != nil {
 			log.Println("InvokeMethod error:", err)
 		} else {
