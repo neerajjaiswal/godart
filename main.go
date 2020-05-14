@@ -3,6 +3,7 @@ package godart
 import (
 	"errors"
 	"log"
+	"os"
 	"time"
 
 	flutter "github.com/go-flutter-desktop/go-flutter"
@@ -48,7 +49,6 @@ func hello(arguments interface{}) (reply interface{}, err error) {
 // 	return "byefromgo", nil
 // }
 
-
 // mutualCall is attached to the plugin struct
 func (p *Example) mutualCall(arguments interface{}) (reply interface{}, err error) {
 	go func() {
@@ -62,6 +62,14 @@ func (p *Example) mutualCall(arguments interface{}) (reply interface{}, err erro
 			}
 		}
 	}()
+
+	if arguments.(string) != "hello_from_dart" {
+		log.Println("InvokeMethod error: arguments.(string) !=  \"hello_from_dart\"")
+		os.Exit(1)
+	}
+
+	return "hello_from_go", nil
+}
 
 func getErrorFunc(arguments interface{}) (reply interface{}, err error) {
 	return nil, plugin.NewError("customErrorCode", errors.New("Some error"))
