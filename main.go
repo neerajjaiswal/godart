@@ -43,6 +43,8 @@ func sendLater(arguments interface{}) (reply interface{}, err error) {
 	} else {
 		log.Println("rep.(string) != \"" + rep.(string) + "\"")
 	}
+
+	return "byefromgo", nil
 }
 
 func getErrorFunc(arguments interface{}) (reply interface{}, err error) {
