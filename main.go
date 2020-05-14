@@ -21,7 +21,7 @@ func (p *Example) InitPlugin(messenger plugin.BinaryMessenger) error {
 	p.channel = plugin.NewMethodChannel(messenger, "com.neer.godart", plugin.StandardMethodCodec{})
 	p.channel.HandleFunc("hello", hello)
 	p.channel.HandleFunc("getError", getErrorFunc)
-	p.channel.CatchAllHandleFunc(catchAllTest)
+	// p.channel.CatchAllHandleFunc(catchAllTest)
 
 	return nil
 }
