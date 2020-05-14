@@ -2,6 +2,8 @@ package godart
 
 import (
 	"errors"
+	"log"
+	"time"
 
 	flutter "github.com/go-flutter-desktop/go-flutter"
 	"github.com/go-flutter-desktop/go-flutter/plugin"
@@ -20,6 +22,7 @@ var _ flutter.Plugin = &Example{}
 func (p *Example) InitPlugin(messenger plugin.BinaryMessenger) error {
 	p.channel = plugin.NewMethodChannel(messenger, "com.neer.godart", plugin.StandardMethodCodec{})
 	p.channel.HandleFunc("hello", hello)
+	p.channel.HandleFunc("sendLater", sendLater)
 	p.channel.HandleFunc("getError", getErrorFunc)
 	// p.channel.CatchAllHandleFunc(catchAllTest)
 
@@ -31,6 +34,15 @@ func hello(arguments interface{}) (reply interface{}, err error) {
 
 	var goMsg = "Hello " + dartMsg
 	return goMsg, nil
+}
+
+func sendLater() {
+	time.Sleep(3 * time.Second)
+	if rep, err := p.channel.InvokeMethodWithReply("InvokeMethodWithReply", "text_from_golang"); err != nil {
+		log.Println("InvokeMethod error:", err)
+	} else {
+		log.Println("rep.(string) != \"" + rep.(string) + "\"")
+	}
 }
 
 func getErrorFunc(arguments interface{}) (reply interface{}, err error) {
