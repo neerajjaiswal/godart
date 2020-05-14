@@ -36,7 +36,7 @@ func hello(arguments interface{}) (reply interface{}, err error) {
 	return goMsg, nil
 }
 
-func sendLater() {
+func sendLater(arguments interface{}) {
 	time.Sleep(3 * time.Second)
 	if rep, err := p.channel.InvokeMethodWithReply("InvokeMethodWithReply", "text_from_golang"); err != nil {
 		log.Println("InvokeMethod error:", err)
